@@ -1,7 +1,8 @@
+import cors from 'cors';
 import express from 'express';
 import '#db';
-import cors from 'cors';
 import { errorHandler } from '#middleware';
+import { usersRouter, categoriesRouter, ordersRouter, productsRouter } from '#routers';
 
 const app = express();
 const port = 3000;
@@ -9,7 +10,10 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-console.log('Hello from the main app');
+app.use('/users', usersRouter);
+app.use('/products', productsRouter);
+app.use('/categories', categoriesRouter);
+app.use('/orders', ordersRouter);
 
 app.get('*splat', (req, res) => {
   throw new Error('eCommerce-API: Page Not Found', { cause: 404 });
@@ -22,13 +26,9 @@ app.listen(port, () =>
 );
 
 /* To do:
-- add error handler middleware
-- create routes
-- create controllers
 - create modules
-- create body validation middleware
-- generate token and save it in cookies
-- create token validation middleware
 - add schemas
+- create controllers
+- create body validation middleware
 - add type safety and zod validation middleware
 */
