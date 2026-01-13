@@ -8,6 +8,10 @@
     "#db": {
       "development": "./src/db/index.ts",
       "default": "./dist/db/index.js"
+    },
+    "#middleware": {
+      "development": "./src/middleware/index.ts",
+      "default": "./dist/middleware/index.js"
     }
   },
   "scripts": {
@@ -26,6 +30,9 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/jsonwebtoken": "^9.0.10",
     "express": "^5.2.1",
     "mongoose": "^9.1.3",
     "zod": "^4.3.5"
