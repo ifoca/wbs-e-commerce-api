@@ -12,6 +12,14 @@
     "#middleware": {
       "development": "./src/middleware/index.ts",
       "default": "./dist/middleware/index.js"
+    },
+    "#routers": {
+      "development": "./src/routers/index.ts",
+      "default": "./dist/routers/index.js"
+    },
+    "#controllers": {
+      "development": "./src/controllers/index.ts",
+      "default": "./dist/controllers/index.js"
     }
   },
   "scripts": {
