@@ -15,9 +15,19 @@ app.use('/products', productsRouter);
 app.use('/categories', categoriesRouter);
 app.use('/orders', ordersRouter);
 
-app.get('*splat', (req, res) => {
-  throw new Error('eCommerce-API: Page Not Found', { cause: 404 });
-});
+app
+  .get('*splat', (req, res) => {
+    throw new Error('eCommerce-API: Page Not Found', { cause: 404 });
+  })
+  .post('*splat', (req, res) => {
+    throw new Error('eCommerce-API: Page Not Found', { cause: 404 });
+  })
+  .put('*splat', (req, res) => {
+    throw new Error('eCommerce-API: Page Not Found', { cause: 404 });
+  })
+  .delete('*splat', (req, res) => {
+    throw new Error('eCommerce-API: Page Not Found', { cause: 404 });
+  });
 
 app.use(errorHandler);
 
