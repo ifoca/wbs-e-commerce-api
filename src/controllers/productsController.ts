@@ -1,7 +1,12 @@
 import type { RequestHandler } from 'express';
+import { Products } from '#models';
 
-export const getProducts: RequestHandler = (req, res) => {
-  console.log('GET products');
+export const getProducts: RequestHandler = async (req, res) => {
+  const products = await Products.find();
+  if (!products) {
+    throw new Error('Something went wrong, could not fetch products', { cause: 404 });
+  }
+  return res.status(200).json(products);
 };
 
 export const createProducts: RequestHandler = (req, res) => {

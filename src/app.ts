@@ -26,7 +26,6 @@ app.listen(port, () =>
 );
 
 /* To do:
-- create models
 - add schemas
 - create controllers
 - create body validation middleware
