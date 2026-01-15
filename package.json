@@ -5,6 +5,10 @@
   "main": "index.js",
   "type": "module",
   "imports": {
+    "#controllers": {
+      "development": "./src/controllers/index.ts",
+      "default": "./dist/controllers/index.js"
+    },
     "#db": {
       "development": "./src/db/index.ts",
       "default": "./dist/db/index.js"
@@ -13,13 +17,13 @@
       "development": "./src/middleware/index.ts",
       "default": "./dist/middleware/index.js"
     },
+    "#models": {
+      "development": "./src/models/index.ts",
+      "default": "./dist/models/index.js"
+    },
     "#routers": {
       "development": "./src/routers/index.ts",
       "default": "./dist/routers/index.js"
-    },
-    "#controllers": {
-      "development": "./src/controllers/index.ts",
-      "default": "./dist/controllers/index.js"
     }
   },
   "scripts": {
