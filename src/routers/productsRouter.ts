@@ -6,16 +6,18 @@ import {
   updateProduct,
   deleteProduct,
 } from '#controllers';
+import { validateSchema } from '#middleware';
+import { productsInputSchema } from '#schemas';
 
 const productsRouter = Router();
 
 // products
 productsRouter.get('/', getProducts);
-productsRouter.post('/', createProducts); // supports ` ?categoryId = filter`
+productsRouter.post('/', validateSchema(productsInputSchema), createProducts); // supports ` ?categoryId = filter`
 
 // products/id
 productsRouter.get('/:id', getProductById);
-productsRouter.put('/:id', updateProduct);
+productsRouter.put('/:id', validateSchema(productsInputSchema), updateProduct);
 productsRouter.delete('/:id', deleteProduct);
 
 export default productsRouter;

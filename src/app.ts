@@ -34,10 +34,3 @@ app.use(errorHandler);
 app.listen(port, () =>
   console.log(`\x1b[34mMain app listening at http://localhost:${port}\x1b[0m`)
 );
-
-/* To do:
-- add schemas
-- create controllers
-- create body validation middleware
-- add type safety and zod validation middleware
-*/

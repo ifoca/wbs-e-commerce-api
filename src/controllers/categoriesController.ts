@@ -1,16 +1,17 @@
 import type { RequestHandler } from 'express';
 import { Categories } from '#models';
 import { isValidObjectId } from 'mongoose';
+import type { CategoriesInput, CategoriesOutput } from '#schemas';
 
-export const getCategories: RequestHandler = async (req, res) => {
+export const getCategories: RequestHandler<{}, CategoriesOutput[]> = async (req, res) => {
   const categories = await Categories.find();
-  if (!categories) {
-    throw new Error('Something went wrong, could not fetch Categories', { cause: 404 });
-  }
   return res.status(200).json(categories);
 };
 
-export const createCategories: RequestHandler = async (req, res) => {
+export const createCategories: RequestHandler<{}, CategoriesOutput, CategoriesInput> = async (
+  req,
+  res
+) => {
   const { name } = req.body;
 
   const newCategory = await Categories.create({ name });
@@ -20,7 +21,10 @@ export const createCategories: RequestHandler = async (req, res) => {
   return res.status(201).json(newCategory);
 };
 
-export const getCategoryById: RequestHandler = async (req, res) => {
+export const getCategoryById: RequestHandler<{ id: string }, CategoriesOutput> = async (
+  req,
+  res
+) => {
   const { id } = req.params;
 
   if (!isValidObjectId(id)) {
@@ -35,7 +39,11 @@ export const getCategoryById: RequestHandler = async (req, res) => {
   return res.status(200).json(category);
 };
 
-export const updateCategory: RequestHandler = async (req, res) => {
+export const updateCategory: RequestHandler<
+  { id: string },
+  CategoriesOutput,
+  CategoriesInput
+> = async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
 
@@ -51,7 +59,11 @@ export const updateCategory: RequestHandler = async (req, res) => {
   return res.status(200).json(updatedCategory);
 };
 
-export const deleteCategory: RequestHandler = async (req, res) => {
+export const deleteCategory: RequestHandler<
+  { id: string },
+  CategoriesOutput,
+  CategoriesInput
+> = async (req, res) => {
   const { id } = req.params;
 
   if (!isValidObjectId(id)) {
@@ -63,5 +75,5 @@ export const deleteCategory: RequestHandler = async (req, res) => {
   if (!category) {
     throw new Error('Category not found', { cause: 404 });
   }
-  return res.status(200).json({ message: `Category with id ${id} has been deleted` });
+  return res.status(200).json(category);
 };
