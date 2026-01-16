@@ -3,7 +3,7 @@ import { Orders, Products, Users } from '#models';
 import { isValidObjectId } from 'mongoose';
 import type { OrdersInput, OrdersOutput } from '#schemas';
 
-export const getOrders: RequestHandler = async (req, res) => {
+export const getOrders: RequestHandler<{}, OrdersOutput[]> = async (req, res) => {
   const orders = await Orders.find();
   if (!orders) {
     throw new Error('Something went wrong, could not get Orders', { cause: 404 });
@@ -43,7 +43,7 @@ export const createOrders: RequestHandler<{}, OrdersOutput, OrdersInput> = async
   return res.status(201).json(newOrder);
 };
 
-export const getOrderById: RequestHandler = async (req, res) => {
+export const getOrderById: RequestHandler<{ id: string }, OrdersOutput> = async (req, res) => {
   const { id } = req.params;
   if (!isValidObjectId(id)) {
     throw new Error('Invalid Product id', { cause: 400 });
@@ -100,7 +100,7 @@ export const updateOrder: RequestHandler<{ id: string }, OrdersOutput, OrdersInp
   return res.status(200).json(updatedOrder);
 };
 
-export const deleteOrder: RequestHandler = async (req, res) => {
+export const deleteOrder: RequestHandler<{ id: string }, OrdersOutput> = async (req, res) => {
   const { id } = req.params;
   if (!isValidObjectId(id)) {
     throw new Error('Invalid Product id', { cause: 400 });
@@ -109,5 +109,5 @@ export const deleteOrder: RequestHandler = async (req, res) => {
   if (!deletedOrder) {
     throw new Error('Oder not found', { cause: 404 });
   }
-  return res.status(200).json({ message: `Order with id ${id} has been deleted` });
+  return res.status(200).json(deletedOrder);
 };
