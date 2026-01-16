@@ -6,6 +6,7 @@ const categoriesSchema = new Schema(
       type: String,
       required: [true, 'Category is required'],
       trim: true,
+      unique: true,
     },
   },
   {

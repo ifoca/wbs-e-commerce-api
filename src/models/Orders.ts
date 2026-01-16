@@ -16,11 +16,15 @@ const ordersSchema = new Schema(
         },
         quantity: {
           type: Number,
+          required: [true, 'Quantity is required'],
+          min: [1, 'Quantity must be at least 1'],
         },
       },
     ],
     total: {
       type: Number,
+      required: [true, 'Total is required'],
+      min: [0, 'Total cannot be negative'],
     },
   },
   {
